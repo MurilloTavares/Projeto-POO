@@ -1,6 +1,7 @@
 package projeto.modelo;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Conta {
     
@@ -60,5 +61,57 @@ public class Conta {
     public void setSexo(char sexo) {
         this.sexo = sexo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.email);
+        hash = 53 * hash + Objects.hashCode(this.senha);
+        hash = 53 * hash + Objects.hashCode(this.nome);
+        hash = 53 * hash + Objects.hashCode(this.sobrenome);
+        hash = 53 * hash + Objects.hashCode(this.nascimento);
+        hash = 53 * hash + this.sexo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Conta other = (Conta) obj;
+        if (this.sexo != other.sexo) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.senha, other.senha)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.sobrenome, other.sobrenome)) {
+            return false;
+        }
+        if (!Objects.equals(this.nascimento, other.nascimento)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Conta{" + "email=" + email + ", senha=" + senha + ", nome=" + nome + ", sobrenome=" + sobrenome + ", nascimento=" + nascimento + ", sexo=" + sexo + '}';
+    }
+    
+    
     
 }
