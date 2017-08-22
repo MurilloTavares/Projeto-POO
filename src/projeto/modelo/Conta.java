@@ -12,52 +12,49 @@ public class Conta {
     private String sobrenome;
     private LocalDate nascimento;
     private char sexo;
+    
+    private Movimentacoes movs;
 
     public Conta(String email, String senha) {
         this.email = email;
         this.senha = senha;
+        movs = new Movimentacoes();
     }
 
     public String getEmail() {
         return email;
     }
-
     public String getSenha() {
         return senha;
     }
-
     public String getNome() {
         return nome;
     }
-
     public String getSobrenome() {
         return sobrenome;
     }
-
     public LocalDate getNascimento() {
         return nascimento;
     }
-
     public char getSexo() {
         return sexo;
+    }
+    public Movimentacoes getMovs(){
+        return movs;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
     }
-
     public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
     }
-
     public void setSexo(char sexo) {
         this.sexo = sexo;
     }
