@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Movimentacao {
     
     //---enums---
-    private enum Tipo{
+    public enum Tipo{
         ENTRADA(1), SAIDA(2);
         
         private int valor;
@@ -14,7 +14,7 @@ public class Movimentacao {
         }
         
     }
-    private enum Categoria{
+    public enum Categoria{
         ALIMENTACAO(1), CARTAO_CREDITO(2), DISPESAS_DOMESTICAS(3), SAUDE(4), PESSOAL(5), OUTROS(6);
         
         private int valor;
