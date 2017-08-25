@@ -36,6 +36,14 @@ public class Contas {
         }
         return null;
     }
+    public Conta getConta(String email, String senha){
+        Conta c = getConta(email);
+        if(c.getSenha().equals(senha)){
+            return c;
+        }else{
+            return null;
+        }
+    }
     
     //Retorna index da Conta
     public int getIndex(Conta c){
