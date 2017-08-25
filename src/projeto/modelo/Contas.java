@@ -38,7 +38,7 @@ public class Contas {
     }
     public Conta getConta(String email, String senha){
         Conta c = getConta(email);
-        if(c.getSenha().equals(senha)){
+        if(c!=null && c.getSenha().equals(senha)){
             return c;
         }else{
             return null;

@@ -19,8 +19,54 @@ public class Tela {
         }
         return scanner.nextInt();
     }
+    private boolean tentarDenovo(){
+        System.out.println("Deseja tentar novamente? S / N");
+        resposta = scanner.next();
+        while(!resposta.equalsIgnoreCase("S") && !resposta.equalsIgnoreCase("N")){
+            System.out.println("Resposta invalida. Por favor digite 'S' para sim e 'N' para nao.");
+            resposta = scanner.next();
+        }
+        if(resposta.equalsIgnoreCase("S")){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+    private LocalDate getData(){
+        int dia;
+        int mes;
+        int ano;
+        boolean erro;
+        while(true){ 
+            erro = false;
+            System.out.print("Dia: ");
+            dia = scInt();
+            System.out.print("Mes: ");
+            mes = scInt();
+            System.out.print("Ano: ");
+            ano = scInt();
+            try{
+                LocalDate nascimento = LocalDate.of(ano, mes, dia);
+            }catch(Exception e){
+                System.out.println("Data invalida. :(");
+                System.out.println("Por favor, digite novamente uma data:");
+                erro = true;
+            }
+            if(!erro){
+                if(LocalDate.of(ano, mes, dia).isAfter(LocalDate.now())){
+                    System.out.println("Data invalida. :(");
+                    System.out.println("Por favor, digite novamente uma data:");
+                }else{
+                    return LocalDate.of(ano, mes, dia);
+                }
+            }
+        }
+        
+    }
     
-    public int login(){
+    public void login(){
+        while(true){
         System.out.println("---TELA DE LOGIN---");
         System.out.println("Digite:\n1 para logar.\n2 para criar uma conta.");
         System.out.print("Resposta: ");resposta = scanner.next();        
@@ -30,11 +76,12 @@ public class Tela {
             resposta = scanner.next();
         }
         System.out.println("");
-        if(resposta.equals("1")){ return 1; }
-        else{ return 2; }
+        if(resposta.equals("1")){ logar(); }
+        else{ cadastroConta(); }        
+        }
     }
     
-    public Conta cadastroConta(){
+    public void cadastroConta(){
         System.out.println("---CRIAR UMA CONTA---");
         
         //Cadastrar E-mail
@@ -61,11 +108,10 @@ public class Tela {
         Conta conta = new Conta(email,senha);
         contas.addConta(conta);
         System.out.println("Parabens! Sua conta foi criada com sucesso.\n");
-        
-        return conta;
+        cadastroPerfil(conta);
     }
     
-    public Conta cadastroPerfil(Conta conta){
+    public void cadastroPerfil(Conta conta){
         System.out.println("---CRIAR PERFIL---");
         System.out.print("Nome: ");
         String nome = scanner.next();
@@ -128,8 +174,22 @@ public class Tela {
         conta.setSexo(sexo);
         
         System.out.println(conta);
-        
-        return conta;
     }
     
+    public void logar(){
+        System.out.println("---Logar---");
+        System.out.print("E-mail: ");
+        String email = scanner.next();
+        System.out.print("Senha: ");
+        String senha = scanner.next();
+        while(contas.getConta(email, senha)==null){
+            System.out.println("E-mail ou senha invalida.");
+            if(!tentarDenovo()){
+                return;
+            }System.out.print("E-mail: ");
+            email = scanner.next();
+            System.out.print("Senha: ");
+            senha = scanner.next();            
+        }
+    }    
 }

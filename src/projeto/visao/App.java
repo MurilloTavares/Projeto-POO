@@ -10,13 +10,8 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         Tela tela = new Tela();
         
-        int r = tela.login();
-        Conta c = null;
-        if(r==2){
-            c = tela.cadastroConta();
-            c = tela.cadastroPerfil(c);
-            System.out.println(c);
-        }
+        tela.login();
+        
         
         
         
