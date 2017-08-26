@@ -133,8 +133,12 @@ public class Tela {
         System.out.print("E-mail: ");
         String email = scanner.next();
         while(contas.getIndex(email)!= -1){
-            System.out.println("O E-mail '"+resposta+"' ja existe :(");
+            System.out.println("O E-mail '"+email+"' ja existe. :(");            
+            if(!tentarDenovo()){
+                return;
+            }
             System.out.print("Por favor, digite outro E-mail: ");
+            email = scanner.next();
         }
         
         //Cadastrar Senha
