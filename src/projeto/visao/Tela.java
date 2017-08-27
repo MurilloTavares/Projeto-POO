@@ -109,6 +109,16 @@ public class Tela {
         
     }
     
+    public boolean temNumero(String s){
+        char[] c = s.toCharArray();
+        for (int i = 0; i < c.length; i++){
+            if (Character.isDigit(c[i])){
+                return true;
+            }
+        }
+        return false;
+    }
+    
     public void login(){
         while(true){
         System.out.println("---TELA DE LOGIN---");
@@ -164,8 +174,18 @@ public class Tela {
         System.out.println("---CRIAR PERFIL---");
         System.out.print("Nome: ");
         String nome = scanner.next();
+        while(temNumero(nome)){
+            System.out.println("Erro. O nome não pode conter números.");
+            System.out.print("Por favor digite um nome válido: ");
+            nome = scanner.next();
+        }
         System.out.print("Sobrenome: ");
         String sobrenome = scanner.next();
+        while(temNumero(sobrenome)){
+            System.out.println("Erro. O sobrenome não pode conter números.");
+            System.out.print("Por favor digite um sobrenome válido: ");
+            sobrenome = scanner.next();
+        }
         System.out.println("Nascimento:");
         LocalDate nascimento = getData();
         char sexo = 0;
@@ -341,12 +361,22 @@ public class Tela {
             case "1":
                 System.out.print("Digite o novo nome: ");
                 String nome = scanner.next();
+                while(temNumero(nome)){
+                    System.out.println("Erro. O nome não pode conter números.");
+                    System.out.print("Por favor digite um nome válido: ");
+                    nome = scanner.next();
+                }
                 c.setNome(nome);
                 System.out.println("Seu nome agora é "+c.getNome()+".");
                 break;
             case "2":
                 System.out.print("Digite o novo sobrenome: ");
                 String sobrenome = scanner.next();
+                while(temNumero(sobrenome)){
+                    System.out.println("Erro. O sobrenome não pode conter números.");
+                    System.out.print("Por favor digite um sobrenome válido: ");
+                    sobrenome = scanner.next();
+                }
                 c.setSobrenome(sobrenome);
                 System.out.println("Seu sobrenome agora é "+c.getSobrenome()+".");
                 break;
