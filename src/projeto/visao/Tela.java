@@ -1,6 +1,7 @@
 package projeto.visao;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 import projeto.modelo.Conta;
 import projeto.modelo.Contas;
@@ -100,6 +101,9 @@ public class Tela {
             if(!erro){
                 if(LocalDate.of(ano, mes, dia).isAfter(LocalDate.now())){
                     System.out.println("Data invalida. :(");
+                    System.out.println("Por favor, digite novamente uma data:");
+                }else if(ChronoUnit.YEARS.between(LocalDate.of(ano, mes, dia),LocalDate.now())>100){
+                    System.out.println("Data fora do intervalo válido. :(");
                     System.out.println("Por favor, digite novamente uma data:");
                 }else{
                     return LocalDate.of(ano, mes, dia);
