@@ -1,6 +1,7 @@
 package projeto.modelo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Conta {
@@ -35,6 +36,10 @@ public class Conta {
     }
     public LocalDate getNascimento() {
         return nascimento;
+    }
+    public String getNascString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/LLLL/yyyy");
+        return nascimento.format(formatter);
     }
     public char getSexo() {
         return sexo;
@@ -106,7 +111,7 @@ public class Conta {
 
     @Override
     public String toString() {
-        return "Conta{" + "email=" + email + ", senha=" + senha + ", nome=" + nome + ", sobrenome=" + sobrenome + ", nascimento=" + nascimento + ", sexo=" + sexo + '}';
+        return "Conta{" + "email=" + email + ", senha=" + senha + ", nome=" + nome + ", sobrenome=" + sobrenome + ", nascimento=" + getNascString() + ", sexo=" + sexo + '}';
     }
     
     
