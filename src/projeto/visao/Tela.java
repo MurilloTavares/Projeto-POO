@@ -1,7 +1,6 @@
 package projeto.visao;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Scanner;
 import projeto.modelo.Conta;
 import projeto.modelo.Contas;
@@ -318,6 +317,8 @@ public class Tela {
     public void gerenciarPerfil(Conta c){
         while(true){
         System.out.println("---GERENCIAR PERFIL---");
+        System.out.println("Perfil Atual:");
+        System.out.println(c);
         System.out.println("Qual campo deseja modificar?");
         System.out.println("1 - Nome.");
         System.out.println("2 - Sobrenome.");
@@ -326,7 +327,7 @@ public class Tela {
         System.out.println("5 - Para modificar a senha.");
         System.out.println("6 - voltar.");
         String resposta = scanner.next();
-        while(!resposta.equals("1")&&!resposta.equals("2")&&!resposta.equals("3")&&!resposta.equals("4")&&!resposta.equals("5")){
+        while(!resposta.equals("1")&&!resposta.equals("2")&&!resposta.equals("3")&&!resposta.equals("4")&&!resposta.equals("5")&&!resposta.equals("6")){
             System.out.println("Resposta invalida. Por favor digite uma das opções:");
             System.out.println("1 - Para modificar o nome.");
             System.out.println("2 - Para modificar o sobrenome.");
@@ -346,7 +347,7 @@ public class Tela {
             case "2":
                 System.out.print("Digite o novo sobrenome: ");
                 String sobrenome = scanner.next();
-                c.setNome(sobrenome);
+                c.setSobrenome(sobrenome);
                 System.out.println("Seu sobrenome agora é "+c.getSobrenome()+".");
                 break;
             case "3":
@@ -357,7 +358,7 @@ public class Tela {
                 break;
             case "4":
                 boolean erro;
-                char sexo;
+                char sexo = c.getSexo();
                 do{            
                     erro = false;
                 System.out.print("Digite o novo sexo(Digite M para MASCULINO ou F para FEMININO): ");
@@ -377,7 +378,9 @@ public class Tela {
                         erro = true;
                         break;
                     }
-                }while(erro);                
+                }while(erro);
+                c.setSexo(sexo);
+                System.out.println("Seu novo sexo agora é "+c.getSexo()+".");
                 break;
             case "5":
                 System.out.println("Digite sua senha antiga: ");
@@ -406,7 +409,8 @@ public class Tela {
                             confnovasenha = scanner.next();
                         }
                     }
-                
+                c.setSenha(novasenha);
+                System.out.println("Sua nova senha agora é: "+c.getSenha());
                 break;
             case "6":
                 return;
