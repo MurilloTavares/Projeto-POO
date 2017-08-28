@@ -246,7 +246,7 @@ public class Tela {
     public void inicial(Conta c){
         while(true){
         System.out.println("---Tela Inicial---");
-        System.out.println("Digite:");
+        System.out.println("Olá "+c.getNome()+" "+c.getSobrenome()+".Digite:");
         System.out.println("1 - para cadastrar uma movimentacao.");
         System.out.println("2 - para gerenciar finanças.");
         System.out.println("3 - para gerenciar perfil.");
@@ -268,7 +268,9 @@ public class Tela {
                 gerenciarFinancas(c.getMovs());
                 break;
             case "3":
-                gerenciarPerfil(c);
+                boolean contaExcluida;
+                contaExcluida = gerenciarPerfil(c);
+                if(contaExcluida) return;
                 break;
             case "4":
                 return ;
@@ -345,7 +347,7 @@ public class Tela {
         
     }
     
-    public void gerenciarPerfil(Conta c){
+    public boolean gerenciarPerfil(Conta c){
         while(true){
         System.out.println("---GERENCIAR PERFIL---");
         System.out.println("Perfil Atual:");
@@ -356,16 +358,17 @@ public class Tela {
         System.out.println("3 - Nascimento.");
         System.out.println("4 - sexo.");
         System.out.println("5 - Para modificar a senha.");
-        System.out.println("6 - voltar.");
+        System.out.println("6 - Para excluir sua conta.");
+        System.out.println("7 - Voltar.");
         String resposta = scanner.next();
-        while(!resposta.equals("1")&&!resposta.equals("2")&&!resposta.equals("3")&&!resposta.equals("4")&&!resposta.equals("5")&&!resposta.equals("6")){
+        while(!resposta.equals("1")&&!resposta.equals("2")&&!resposta.equals("3")&&!resposta.equals("4")&&!resposta.equals("5")&&!resposta.equals("6")&&!resposta.equals("7")){
             System.out.println("Resposta invalida. Por favor digite uma das opções:");
             System.out.println("1 - Para modificar o nome.");
             System.out.println("2 - Para modificar o sobrenome.");
             System.out.println("3 - Para modificar o nascimento.");
             System.out.println("4 - Para modificar o sexo.");
-            System.out.println("5 - Para modificar a senha.");
-            System.out.println("6 - voltar.");
+            System.out.println("6 - Para excluir sua conta.");
+            System.out.println("7 - Voltar.");
             resposta = scanner.next();
         }
         switch(resposta){
@@ -429,7 +432,7 @@ public class Tela {
                 while(!c.getSenha().equals(senha)){
                     System.out.println("Senha incorreta.");
                     if(!tentarDenovo()){
-                    return;
+                    return false;
                     }else{
                         System.out.println("Digite sua senha antiga: ");
                         senha = scanner.next();
@@ -442,7 +445,7 @@ public class Tela {
                     while(!novasenha.equals(confnovasenha)){
                         System.out.println("Erro. As senhas não são iguais.");
                         if(!tentarDenovo()){
-                            return;
+                            return false;
                         }else{
                             System.out.println("Digite sua nova senha: ");
                             novasenha = scanner.next();
@@ -454,7 +457,35 @@ public class Tela {
                 System.out.println("Sua nova senha agora é: "+c.getSenha()+"\n");
                 break;
             case "6":
-                return;
+                System.out.print("Digite sua senha: ");
+                String senha1 = scanner.next();
+                while(!senha1.equals(c.getSenha())){
+                    System.out.println("Senha incorreta.");
+                    if(!tentarDenovo()){
+                            return false;
+                    }else{
+                        System.out.print("Digite novamente sua senha: ");
+                        senha1 = scanner.next();
+                    }
+                }
+                System.out.println("Tem certeza que deseja excluir sua senha? S / N:");
+                String resp = scanner.next();
+                while(!resp.equals("S")&&!resp.equals("s")&&!resp.equals("N")&&!resp.equals("n")){
+                    System.out.println("Resposta incorreta. Por favor, digite novamente sua resposta S / N: ");
+                    resp = scanner.next();
+                }
+                switch(resp){
+                    case "N":
+                    case "n":
+                        System.out.println("Excluir conta cancelado.");
+                        return false;
+                    case "S":
+                    case "s":
+                        contas.deleteConta(c);
+                        return true;
+                }
+            case "7":
+                return false;
         }
         }    
                
