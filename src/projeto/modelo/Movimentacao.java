@@ -1,6 +1,7 @@
 package projeto.modelo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Movimentacao {
     
@@ -56,6 +57,10 @@ public class Movimentacao {
     public Categoria getCategoria() {
         return categoria;
     }
+    public String getDataString(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/LLLL/yyyy");
+        return data.format(formatter);
+    }
 
     //---setters---
     public void setDescricao(String descricao) {
@@ -76,7 +81,7 @@ public class Movimentacao {
 
     @Override
     public String toString() {
-        return "Movimentacao{" + "descricao=" + descricao + ", data=" + data + ", valor=" + valor + ", tipo=" + tipo + ", categoria=" + categoria + '}';
+        return "Movimentacao{" + "descricao=" + descricao + ", data=" + getDataString() + ", valor=" + valor + ", tipo=" + tipo + ", categoria=" + categoria + '}';
     }
 
     

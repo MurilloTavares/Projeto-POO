@@ -215,14 +215,14 @@ public class Tela {
             }
         }while(erro);
         
-        System.out.println("Parabens "+nome+". Seu perfil agora esta completo. :)");
+        System.out.println("\nParabens "+nome+". Seu perfil agora esta completo. :)");
         System.out.println("Selecione a opcao 'Gerenciar Perfil' caso deseje alterar dados do seu perfil.\n");
         conta.setNome(nome);
         conta.setSobrenome(sobrenome);
         conta.setNascimento(nascimento);
         conta.setSexo(sexo);
         
-        System.out.println(conta);
+        System.out.println(conta+"\n");
     }
     
     public void logar(){
@@ -278,18 +278,23 @@ public class Tela {
 
     public void cadastrarMovimentacao(Conta c){
         System.out.println("---Cadastrar Movimentacao---");
-        System.out.println("Descricao: ");
+        System.out.print("Descricao: ");
         String desc = scanner.next();
         System.out.println("Data: ");
         LocalDate data = getData();
-        System.out.println("Valor: ");
+        System.out.print("Valor: ");
         float valor = scFloat();
+        while(valor<1){
+            System.out.println("Valor inválido. Por favor, digite um número positivo.");
+            System.out.print("Valor: ");
+            valor = scFloat();
+        }
         Tipo tipo = getTipo();
         Categoria categoria = getCategoria();
         
         Movimentacao m = new Movimentacao(desc,data,valor,tipo,categoria);
         System.out.println("Nova Movimentacao:");
-        System.out.println(m);
+        System.out.println(m+"\n");
         c.getMovs().addMov(m);
         
     }
@@ -329,7 +334,9 @@ public class Tela {
     
     public void visualizarMovs(Movimentacoes movs){
         System.out.println("---Movimentacoes---");
-        System.out.println(movs.getMovs());
+        for(Movimentacao m : movs.getMovs()){
+            System.out.println(m);
+        }
     }
     public void excluirMov(Movimentacoes movs){
         
@@ -371,7 +378,7 @@ public class Tela {
                     nome = scanner.next();
                 }
                 c.setNome(nome);
-                System.out.println("Seu nome agora é "+c.getNome()+".");
+                System.out.println("Seu nome agora é "+c.getNome()+".\n");
                 break;
             case "2":
                 System.out.print("Digite o novo sobrenome: ");
@@ -382,13 +389,13 @@ public class Tela {
                     sobrenome = scanner.next();
                 }
                 c.setSobrenome(sobrenome);
-                System.out.println("Seu sobrenome agora é "+c.getSobrenome()+".");
+                System.out.println("Seu sobrenome agora é "+c.getSobrenome()+".\n");
                 break;
             case "3":
                 System.out.println("Digite a nova data de nascimento: ");
                 LocalDate nascimento = getData();
                 c.setNascimento(nascimento);
-                System.out.println("Sua data de nascimento agora é "+c.getNascimento()+".");
+                System.out.println("Sua data de nascimento agora é "+c.getNascimento()+".\n");
                 break;
             case "4":
                 boolean erro;
@@ -414,7 +421,7 @@ public class Tela {
                     }
                 }while(erro);
                 c.setSexo(sexo);
-                System.out.println("Seu novo sexo agora é "+c.getSexo()+".");
+                System.out.println("Seu novo sexo agora é "+c.getSexo()+".\n");
                 break;
             case "5":
                 System.out.println("Digite sua senha antiga: ");
@@ -444,7 +451,7 @@ public class Tela {
                         }
                     }
                 c.setSenha(novasenha);
-                System.out.println("Sua nova senha agora é: "+c.getSenha());
+                System.out.println("Sua nova senha agora é: "+c.getSenha()+"\n");
                 break;
             case "6":
                 return;
