@@ -241,6 +241,7 @@ public class Tela {
             System.out.print("Senha: ");
             senha = scanner.next();            
         }
+        System.out.println();
         inicial(contas.getConta(email, senha));
     }
     
@@ -261,12 +262,13 @@ public class Tela {
             System.out.println("4 - para sair");
             resposta = scanner.next();
         }
+        System.out.println();
         switch(resposta){
             case "1":
                 cadastrarMovimentacao(c);
                 break;
-            case "2":
-                gerenciarFinancas(c.getMovs());
+            case "2":                
+                visualizarMovs(c.getMovs());
                 break;
             case "3":
                 boolean contaExcluida;
@@ -306,44 +308,12 @@ public class Tela {
         
     }
     
-    public void gerenciarFinancas(Movimentacoes movs){
-        while(true){
-        System.out.println("---GERENCIAR FINANCAS---");
-        System.out.println("Digite:");
-        System.out.println("1 - para visualizar movimentacoes.");
-        System.out.println("2 - para excluir uma movimentacao.");
-        System.out.println("3 - para atualizar uma movimentacao.");
-        System.out.println("4 - para voltar.");
-        String resposta = scanner.next();
-        while(!resposta.equals("1")&&!resposta.equals("2")&&!resposta.equals("3")&&!resposta.equals("4")){
-            System.out.println("Resposta invalida. Por favor digite uma das opções:");
-            System.out.println("1 - para visualizar movimentacoes.");
-            System.out.println("2 - para excluir uma movimentacao.");
-            System.out.println("3 - para atualizar uma movimentacao.");
-            System.out.println("4 - para voltar.");
-            resposta = scanner.next();
-        }
-        switch(resposta){
-            case "1":
-                visualizarMovs(movs);
-                break;
-            case "2":
-                excluirMov(movs);
-                break;
-            case "3":
-                atualizarMov(movs);
-                break;
-            case "4":
-                return;
-        }
-        }        
-    }
-    
     public void visualizarMovs(Movimentacoes movs){
         System.out.println("---Movimentacoes---");
         for(Movimentacao m : movs.getMovs()){
             System.out.println(m);
         }
+        System.out.println("\n");
     }
     public void excluirMov(Movimentacoes movs){
         
@@ -487,6 +457,7 @@ public class Tela {
                     case "S":
                     case "s":
                         contas.deleteConta(c);
+                        System.out.println("Sua conta foi excluida.");
                         return true;
                 }
             case "7":
