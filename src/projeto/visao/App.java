@@ -1,7 +1,6 @@
 package projeto.visao;
 
 import java.util.Scanner;
-import projeto.modelo.Conta;
 
 public class App {    
     
@@ -11,15 +10,6 @@ public class App {
         Tela tela = new Tela();
         
         tela.login();
-        
-        
-        
-        
-        
-        
-                
-        
-        
         
     }
 }

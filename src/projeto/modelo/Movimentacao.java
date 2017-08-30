@@ -3,42 +3,18 @@ package projeto.modelo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Movimentacao {
-    
-    //---enums---
-    public enum Tipo{
-        ENTRADA(1), SAIDA(2);
-        
-        private int valor;
-        Tipo(int valor){
-            this.valor = valor;
-        }
-        
-    }
-    public enum Categoria{
-        ALIMENTACAO(1), CARTAO_CREDITO(2), DISPESAS_DOMESTICAS(3), SAUDE(4), PESSOAL(5), OUTROS(6);
-        
-        private int valor;
-        Categoria(int valor){
-            this.valor = valor;
-        }
-        
-    }
+public abstract class Movimentacao {
     
     //---atributos---
     private String descricao;
     private LocalDate data;
     private float valor;
-    private Tipo tipo;
-    private Categoria categoria;
     
     //---construtor---
-    public Movimentacao(String descricao, LocalDate data, float valor, Tipo tipo, Categoria categoria) {
+    public Movimentacao(String descricao, LocalDate data, float valor) {
         this.descricao = descricao;
         this.data = data;
         this.valor = valor;
-        this.tipo = tipo;
-        this.categoria = categoria;
     }
 
     //---getters---
@@ -51,13 +27,7 @@ public class Movimentacao {
     public float getValor() {
         return valor;
     }
-    public Tipo getTipo() {
-        return tipo;
-    }
-    public Categoria getCategoria() {
-        return categoria;
-    }
-    public String getDataString(){
+    public String getDataFormat(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/LLLL/yyyy");
         return data.format(formatter);
     }
@@ -72,17 +42,5 @@ public class Movimentacao {
     public void setValor(float valor) {
         this.valor = valor;
     }
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
-    }
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
 
-    @Override
-    public String toString() {
-        return "Movimentacao{" + "descricao=" + descricao + ", data=" + getDataString() + ", valor=" + valor + ", tipo=" + tipo + ", categoria=" + categoria + '}';
-    }
-
-    
 }

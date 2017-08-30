@@ -5,9 +5,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 import projeto.modelo.Conta;
 import projeto.modelo.Contas;
+import projeto.modelo.MovEntrada;
+import projeto.modelo.MovSaida;
+import projeto.modelo.MovSaida.Categoria;
 import projeto.modelo.Movimentacao;
-import projeto.modelo.Movimentacao.Categoria;
-import projeto.modelo.Movimentacao.Tipo;
 import projeto.modelo.Movimentacoes;
 
 public class Tela {
@@ -29,7 +30,7 @@ public class Tela {
         }
         return scanner.nextFloat();
     }
-    private Tipo getTipo(){
+    private int getTipo(){
         System.out.println("Tipo:");
         System.out.println("Digite:\n1 - para entrada.\n2 - para saida.");
         String resposta = scanner.next();
@@ -39,9 +40,9 @@ public class Tela {
             resposta = scanner.next();
         }
         if(resposta.equals("1")){
-            return Tipo.ENTRADA;
+            return 1;
         }else{
-            return Tipo.SAIDA;
+            return 2;
         }
     }
     private Categoria getCategoria(){
@@ -280,6 +281,7 @@ public class Tela {
 
     public void cadastrarMovimentacao(Conta c){
         System.out.println("---Cadastrar Movimentacao---");
+        int tipo = getTipo();
         System.out.print("Descricao: ");
         String desc = scanner.next();
         System.out.println("Data: ");
@@ -291,10 +293,13 @@ public class Tela {
             System.out.print("Valor: ");
             valor = scFloat();
         }
-        Tipo tipo = getTipo();
-        Categoria categoria = getCategoria();
-        
-        Movimentacao m = new Movimentacao(desc,data,valor,tipo,categoria);
+        Movimentacao m;
+        if(tipo==1){
+            m = new MovEntrada(desc,data,valor);
+        }else{
+            Categoria categoria = getCategoria();
+            m = new MovSaida(desc,data,valor,categoria);
+        }
         System.out.println("Nova Movimentacao:");
         System.out.println(m+"\n");
         c.getMovs().addMov(m);
